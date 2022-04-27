@@ -14,12 +14,15 @@ restore:
 test:
 	make -C neo-cli $@
 
+start:
+	make -C neo-cli $@
+
 align-project:
 	make -C neo-cli $@
 
 clean:
 	make -C neo-cli $@
 
-.PHONY: all build restore test align-project clean
+.PHONY: all build restore test start align-project clean
 
 .SILENT: clean

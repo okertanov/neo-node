@@ -279,6 +279,17 @@ namespace Neo.ConsoleService
             _running = false;
         }
 
+        /// <summary>
+        /// Process "history" command
+        /// </summary>
+        [ConsoleCommand("history", Category = "Base Commands", Description = "Dump commands history.")]
+        protected void OnHistory()
+        {
+            var historyStr = string.Join(Environment.NewLine, ReadLine.GetHistory());
+            Console.WriteLine(historyStr);
+        }
+        
+
         #endregion
 
         public virtual void OnStart(string[] args)
@@ -513,6 +524,9 @@ namespace Neo.ConsoleService
                     {
                         commands.Add(command);
                     }
+
+                    // Register autocompletion
+                    AutoCompletionHandler.RegisterSuggestions(command.Verbs);
                 }
             }
         }
@@ -562,6 +576,9 @@ namespace Neo.ConsoleService
                 }
                 else
                 {
+                    ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
+                    ReadLine.HistoryEnabled = true;
+
                     OnStart(args);
                     RunConsole();
                     OnStop();
@@ -574,9 +591,9 @@ namespace Neo.ConsoleService
             }
         }
 
-        protected string ReadLine()
+        protected string ConsoleReadLine()
         {
-            Task<string> readLineTask = Task.Run(() => Console.ReadLine());
+            Task<string> readLineTask = Task.Run(() => ReadLine.Read());
 
             try
             {
@@ -612,7 +629,9 @@ namespace Neo.ConsoleService
                 }
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                string line = ReadLine()?.Trim();
+                
+                string line = ConsoleReadLine()?.Trim();
+
                 if (line == null) break;
                 Console.ForegroundColor = ConsoleColor.White;
 

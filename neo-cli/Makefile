@@ -11,7 +11,15 @@ restore:
 	dotnet restore
 
 test:
-	dotnet test
+	cd ../tests/Neo.ConsoleService.Tests && dotnet test --nologo --no-restore --verbosity normal 
+
+start: plugins
+	dotnet dist/neo-cli.dll
+
+plugins:
+	-@mkdir ./dist/Plugins
+	-@cp -a ../../neo-modules/dist/* ./dist/Plugins
+	-@sed -i 's/\/nxa-node-data\///g' ./dist/config.json
 
 align-project: neo-cli.csproj
 	dotnet remove $< reference Neo
@@ -26,6 +34,6 @@ clean:
 	-@rm -rf ../Neo.ConsoleService/obj
 	-@rm -rf ../tests/Neo.ConsoleService.Tests/obj
 
-.PHONY: all build restore test align-project clean
+.PHONY: all build restore test start plugins align-project clean
 
 .SILENT: clean
