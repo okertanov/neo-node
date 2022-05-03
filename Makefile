@@ -1,0 +1,25 @@
+##
+## Copyright (c) 2022 - Team11. All rights reserved.
+##
+
+all:
+	make -C neo-cli $@
+
+build:
+	make -C neo-cli $@
+
+restore:
+	make -C neo-cli $@
+
+test:
+	make -C neo-cli $@
+
+align-project:
+	make -C neo-cli $@
+
+clean:
+	make -C neo-cli $@
+
+.PHONY: all build restore test align-project clean
+
+.SILENT: clean
