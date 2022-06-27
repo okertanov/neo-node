@@ -644,11 +644,11 @@ namespace Neo.ConsoleService
                 }
                 catch (TargetInvocationException ex)
                 {
-                    ConsoleHelper.Error(ex.InnerException.Message);
+                    ConsoleHelper.Error($"{ex.InnerException.Message}, {ex.InnerException.ToString()}");
                 }
                 catch (Exception ex)
                 {
-                    ConsoleHelper.Error(ex.Message);
+                    ConsoleHelper.Error($"{ex.Message}, {ex.ToString()}");
                 }
             }
 

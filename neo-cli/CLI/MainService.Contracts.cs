@@ -38,7 +38,7 @@ namespace Neo.CLI
             }
             catch (InvalidOperationException e)
             {
-                ConsoleHelper.Error(GetExceptionMessage(e));
+                ConsoleHelper.Error($"{GetExceptionMessage(e)}, {e.ToString()}");
                 return;
             }
             UInt160 hash = SmartContract.Helper.GetContractHash(tx.Sender, nef.CheckSum, manifest.Name);
@@ -96,7 +96,7 @@ namespace Neo.CLI
             }
             catch (InvalidOperationException e)
             {
-                ConsoleHelper.Error(GetExceptionMessage(e));
+                ConsoleHelper.Error($"{GetExceptionMessage(e)}, {e.ToString()}");
                 return;
             }
             ContractState contract = NativeContract.ContractManagement.GetContract(NeoSystem.StoreView, scriptHash);
@@ -166,7 +166,7 @@ namespace Neo.CLI
             }
             catch (InvalidOperationException e)
             {
-                ConsoleHelper.Error(GetExceptionMessage(e));
+                ConsoleHelper.Error($"{GetExceptionMessage(e)}, {e.ToString()}");
                 return;
             }
             ConsoleHelper.Info("Network fee: ",

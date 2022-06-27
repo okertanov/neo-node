@@ -62,7 +62,7 @@ namespace Neo.CLI
             }
             catch (InvalidOperationException e)
             {
-                ConsoleHelper.Error(GetExceptionMessage(e));
+                ConsoleHelper.Error($"{GetExceptionMessage(e)}, {e.ToString()}");
                 return;
             }
             if (!ReadUserInput("Relay tx(no|yes)").IsYes())

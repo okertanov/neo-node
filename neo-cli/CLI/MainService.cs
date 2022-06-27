@@ -579,7 +579,7 @@ namespace Neo.CLI
             }
             catch (InvalidOperationException e)
             {
-                ConsoleHelper.Error(GetExceptionMessage(e));
+                ConsoleHelper.Error($"{GetExceptionMessage(e)}, {e.ToString()}");
                 return;
             }
 
