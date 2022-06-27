@@ -476,7 +476,7 @@ namespace Neo.CLI
                 }
                 catch (Exception ex)
                 {
-                    ConsoleHelper.Error(ex.GetBaseException().Message);
+                    ConsoleHelper.Error($"{ex.GetBaseException().Message}, {ex.GetBaseException().ToString()}");
                 }
             }
         }
